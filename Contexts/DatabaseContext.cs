@@ -62,6 +62,37 @@ public class DatabaseContext : DbContext
             }
         });
 
+        modelBuilder.Entity<Roles>().HasData(new List<Roles> 
+        {
+            new Roles 
+            {
+                RoleID = 1,
+                Name = "User"
+            }
+        });
+
+        modelBuilder.Entity<Accounts>().HasData(new List<Accounts>
+        {
+            new Accounts
+            {
+                AccountId = 1,
+                RoleId = 1,
+                FirstName = "kacper",
+                LastName = "januszewski",
+                Email = "kacper.januszewski@gmail.com",
+                Phone = "799916791"
+            }
+        });
+
+        modelBuilder.Entity<Shopping_Carts>().HasData(new List<Shopping_Carts>
+        {
+            new Shopping_Carts
+            {
+                AccountId = 1,
+                ProductId = 1
+            }
+        });
+
         modelBuilder.Entity<Products_Categories>()
             .HasKey(pc => new { pc.ProductId, pc.CategoryId });
 

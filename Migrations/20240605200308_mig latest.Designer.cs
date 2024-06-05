@@ -3,6 +3,7 @@ using Code_First.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Code_First.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240605200308_mig latest")]
+    partial class miglatest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,17 +65,6 @@ namespace Code_First.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Accounts");
-
-                    b.HasData(
-                        new
-                        {
-                            AccountId = 1,
-                            Email = "kacper.januszewski@gmail.com",
-                            FirstName = "kacper",
-                            LastName = "januszewski",
-                            Phone = "799916791",
-                            RoleId = 1
-                        });
                 });
 
             modelBuilder.Entity("Code_First.Models.Categories", b =>
@@ -191,13 +183,6 @@ namespace Code_First.Migrations
                     b.HasKey("RoleID");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleID = 1,
-                            Name = "User"
-                        });
                 });
 
             modelBuilder.Entity("Code_First.Models.Shopping_Carts", b =>
@@ -219,14 +204,6 @@ namespace Code_First.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Shopping_Carts");
-
-                    b.HasData(
-                        new
-                        {
-                            AccountId = 1,
-                            ProductId = 1,
-                            Amount = 0
-                        });
                 });
 
             modelBuilder.Entity("Code_First.Models.Accounts", b =>

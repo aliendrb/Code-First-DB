@@ -1,5 +1,5 @@
-
 using Code_First.Contexts;
+using Code_First.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Code_First
@@ -9,15 +9,18 @@ namespace Code_First
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<DatabaseContext>(opt =>
-            { opt.UseSqlServer(builder.Configuration.GetConnectionString("Default")); }); ;
+            builder.Services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -25,12 +28,8 @@ namespace Code_First
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
